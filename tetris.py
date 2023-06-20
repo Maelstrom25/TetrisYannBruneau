@@ -105,15 +105,19 @@ class Tetris:
                 continue
 
             # [piece + look-ahead piece] list is updated, look-ahead piece becomes next piece
-
             pieces[0] = pieces[1]
 
-            # the following look-ahead piece is determined in following lines
+            # tetromino falls down and is placed
+            while turn.movedown(board):
+                pass
+            board.place_tetromino(turn)
+            # score gets updated (if line is cleared)
+            score += board.line_clear()
 
+            # the following look-ahead piece is determined in following lines
             if not duo:
                 # next piece is generated randomly as Alice plays alone
                 pieces[1] = pool.nextpiece()
-
             else:
                 if not colorexp:
                     # not colorexp -> Bob takes a turn, selecting tetromino shape
@@ -121,16 +125,6 @@ class Tetris:
                 else:
                     # colorexp -> Bob takes a turn, selecting tetromino color
                     pieces[1] = player.bob_play_color(board, pool, pieces[0], coloring)
-
-
-            # tetromino falls down and is placed
-            while turn.movedown(board):
-                pass
-            board.place_tetromino(turn)
-
-            # score gets updated (if line is cleared)
-            score += board.line_clear()
-
 
             # stopping condition
             if board.game_over():

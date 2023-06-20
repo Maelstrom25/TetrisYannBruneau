@@ -6,9 +6,6 @@ import matplotlib.pyplot as plt
 def mean(scores):
     return stats.mean(scores)
 
-def median(scores):
-    return stats.median(scores)
-
 def win_rate(scores):
     return scores.count(200) / len(scores) * 100
 
@@ -24,7 +21,6 @@ def calculate_stats(x, scores):
         exp_scores = scores[i]
         statistics[x[i]] = {
             'mean': mean(exp_scores),
-            'median': median(exp_scores),
             'win_rate': win_rate(exp_scores),
             'min_score': min_score(exp_scores),
             'max_score': max_score(exp_scores),
@@ -55,51 +51,56 @@ exp1_scores = [
 
 
 exp2_scores = [
-     200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200
+    90, 106, 70, 69, 92, 55, 108, 79, 43, 132, 34, 69, 56, 45, 77, 35, 100, 69, 90, 82
 ]
 
 
 exp3_scores = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 1, 0, 0, 1, 0, 1, 1, 2, 1, 1, 1, 1, 1, 2, 0, 0, 1, 0],
-    [3, 8, 9, 2, 4, 1, 4, 5, 2, 8, 0, 2, 7, 1, 4, 1, 2, 5, 0, 4],
-    [12, 10, 3, 11, 8, 9, 3, 8, 9, 4, 17, 4, 10, 6, 14, 11, 5, 14, 7, 18],
-    [2, 7, 12, 26, 8, 13, 25, 7, 12, 10, 16, 17, 21, 12, 7, 21, 14, 12, 42, 13],
-    [26, 14, 18, 53, 8, 24, 36, 18, 50, 31, 4, 10, 22, 56, 10, 35, 15, 35, 14, 31],
-    [53, 48, 44, 16, 48, 69, 42, 48, 32, 33, 28, 65, 46, 47, 23, 42, 33, 31, 67, 15],
-    [75, 61, 66, 47, 31, 37, 55, 71, 39, 79, 125, 98, 69, 44, 53, 89, 53, 48, 46, 90],
-    [69, 97, 24, 76, 64, 76, 146, 26, 93, 76, 144, 97, 35, 78, 61, 10, 53, 35, 111, 20],
-    [136, 106, 150, 22, 128, 134, 142, 63, 107, 200, 67, 78, 159, 22, 54, 76, 200, 53, 45, 116],
-    [93, 152, 80, 22, 41, 55, 81, 77, 98, 152, 45, 123, 36, 199, 33, 142, 66, 40, 127, 70],
-    [92, 200, 102, 182, 117, 200, 65, 65, 82, 43, 174, 138, 128, 112, 167, 137, 200, 90, 135, 139],
-    [200, 49, 117, 106, 200, 200, 111, 200, 172, 115, 200, 107, 116, 119, 200, 200, 115, 145, 144, 200],
-    [34, 200, 200, 199, 200, 96, 200, 33, 180, 200, 200, 200, 105, 200, 156, 200, 200, 200, 142, 86],
-    [79, 135, 134, 200, 200, 200, 123, 181, 200, 200, 45, 200, 200, 200, 200, 200, 165, 200, 200, 200]
+    [1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+    [1, 1, 3, 3, 2, 3, 3, 2, 1, 1, 1, 2, 5, 3, 1, 2, 1, 2, 2, 1],
+    [7, 3, 7, 3, 0, 6, 1, 4, 5, 3, 4, 1, 2, 4, 1, 8, 7, 4, 3, 5],
+    [12, 11, 8, 7, 12, 16, 14, 17, 12, 10, 11, 3, 4, 9, 11, 7, 7, 9, 12, 0],
+    [15, 19, 4, 6, 11, 7, 14, 7, 5, 8, 14, 19, 5, 1, 19, 22, 7, 15, 16, 6],
+    [22, 11, 24, 16, 20, 14, 22, 22, 5, 14, 24, 15, 4, 22, 12, 30, 5, 6, 20, 15],
+    [34, 31, 39, 23, 17, 25, 35, 16, 27, 23, 24, 19, 34, 7, 18, 17, 29, 24, 25, 20],
+    [15, 13, 29, 13, 31, 18, 22, 22, 26, 5, 19, 29, 48, 44, 24, 22, 39, 18, 22, 6],
+    [13, 13, 25, 24, 26, 39, 28, 49, 23, 19, 27, 19, 27, 15, 20, 51, 35, 27, 25, 35],
+    [35, 37, 41, 29, 32, 30, 50, 34, 55, 19, 26, 32, 33, 34, 43, 18, 24, 24, 26, 39],
+    [53, 16, 54, 17, 38, 29, 53, 5, 12, 46, 42, 51, 41, 22, 33, 35, 7, 54, 34, 32],
+    [17, 57, 48, 33, 37, 25, 33, 41, 63, 19, 43, 37, 52, 30, 56, 31, 28, 31, 40, 27],
+    [45, 30, 37, 53, 19, 77, 55, 39, 45, 38, 69, 40, 22, 27, 39, 41, 26, 29, 55, 52],
+    [68, 29, 42, 91, 75, 36, 31, 74, 76, 34, 55, 41, 39, 69, 36, 57, 55, 42, 37, 24]
 ]
 
 
 exp4_scores = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 2, 0, 3, 0, 2, 2, 3],
-    [6, 2, 3, 3, 7, 3, 0, 3, 6, 4, 6, 5, 12, 2, 12, 7, 2, 2, 9, 4],
-    [10, 12, 18, 10, 7, 10, 1, 10, 11, 22, 17, 4, 10, 17, 11, 17, 8, 12, 3, 16],
-    [35, 12, 15, 21, 22, 23, 12, 9, 21, 23, 29, 32, 10, 21, 15, 20, 19, 46, 26, 21],
-    [10, 15, 30, 20, 20, 23, 55, 48, 47, 45, 24, 70, 50, 99, 45, 24, 49, 24, 18, 39],
-    [33, 71, 49, 23, 40, 42, 19, 29, 63, 71, 38, 32, 65, 65, 54, 44, 57, 57, 25, 16],
-    [96, 15, 69, 42, 44, 70, 50, 14, 46, 72, 44, 41, 61, 107, 127, 86, 34, 104, 90, 20],
-    [143, 110, 98, 45, 53, 167, 75, 200, 50, 39, 50, 125, 71, 55, 72, 29, 94, 120, 18, 75],
-    [122, 200, 46, 58, 136, 130, 54, 124, 96, 55, 51, 106, 85, 33, 200, 61, 13, 200, 52, 154],
-    [39, 193, 122, 72, 24, 200, 80, 98, 65, 89, 96, 125, 52, 121, 200, 64, 67, 188, 27, 118],
-    [181, 118, 53, 195, 119, 174, 138, 18, 137, 38, 200, 200, 107, 67, 200, 47, 200, 89, 34, 200],
-    [50, 200, 31, 171, 189, 94, 200, 200, 110, 200, 133, 200, 200, 200, 200, 155, 200, 132, 58, 44],
-    [82, 82, 200, 27, 28, 43, 200, 90, 18, 106, 40, 200, 200, 200, 200, 200, 87, 49, 200, 200],
-    [200, 161, 200, 121, 200, 66, 200, 200, 27, 200, 193, 60, 77, 200, 200, 65, 72, 200, 200, 200]
+    [0, 0, 0, 0, 1, 2, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1],
+    [4, 8, 3, 7, 7, 2, 0, 2, 3, 3, 3, 1, 1, 1, 3, 4, 0, 3, 3, 1],
+    [9, 19, 16, 4, 15, 12, 8, 7, 10, 10, 5, 7, 3, 1, 9, 10, 3, 9, 12, 19],
+    [4, 2, 7, 3, 19, 20, 7, 10, 24, 11, 25, 21, 9, 5, 19, 16, 4, 9, 16, 17],
+    [27, 26, 33, 25, 1, 11, 16, 7, 12, 20, 23, 23, 34, 14, 35, 12, 26, 26, 18, 21],
+    [32, 30, 12, 46, 32, 44, 29, 42, 18, 46, 32, 20, 41, 13, 14, 37, 23, 26, 15, 47],
+    [36, 28, 46, 32, 28, 12, 69, 31, 17, 31, 22, 25, 33, 40, 20, 71, 4, 31, 5, 54],
+    [12, 41, 49, 23, 32, 40, 58, 52, 36, 17, 28, 39, 4, 50, 23, 40, 27, 36, 67, 56],
+    [46, 44, 66, 55, 13, 49, 66, 38, 44, 49, 55, 33, 57, 26, 26, 47, 62, 32, 32, 49],
+    [24, 44, 8, 34, 15, 80, 33, 36, 48, 59, 35, 56, 63, 69, 86, 21, 55, 51, 28, 32],
+    [49, 64, 40, 81, 48, 116, 46, 42, 40, 69, 78, 67, 17, 14, 104, 29, 4, 23, 76, 38],
+    [58, 69, 98, 48, 30, 76, 61, 74, 94, 58, 21, 35, 31, 43, 66, 109, 89, 76, 70, 44],
+    [128, 43, 94, 115, 50, 163, 94, 142, 116, 104, 30, 79, 58, 37, 107, 86, 87, 159, 65, 79],
+    [99, 88, 48, 78, 116, 117, 138, 131, 99, 134, 142, 59, 26, 100, 90, 90, 9, 130, 125, 83]
 ]
 
 
 exp1_stats = calculate_stats(x, exp1_scores)
 exp3_stats = calculate_stats(x, exp3_scores)
 exp4_stats = calculate_stats(x, exp4_scores)
+
+exp2_mean = mean(exp2_scores)
+exp2_wr = win_rate(exp2_scores)
+exp2_min = min_score(exp2_scores)
+exp2_max = max_score(exp2_scores)
 
 
 x = list(range(1, 16))
@@ -119,13 +120,9 @@ exp1_max = [exp1_stats[i]['max_score'] for i in x]
 exp3_max = [exp3_stats[i]['max_score'] for i in x]
 exp4_max = [exp4_stats[i]['max_score'] for i in x]
 
-exp1_medians = [exp1_stats[i]['median'] for i in x]
-exp3_medians = [exp3_stats[i]['median'] for i in x]
-exp4_medians = [exp4_stats[i]['median'] for i in x]
 
-
-
-# plot for experiment 2
+"""
+# plot for experiment 1
 
 plt.plot(x, exp1_means, label="Exp 1: Average score", linewidth=3, color = 'red')
 plt.plot(x, exp1_min, label="Exp 1: Lowest score", color = 'blue')
@@ -140,17 +137,31 @@ plt.axvline(x=7.5, ymin=0, ymax=200 , linestyle=(0, (1, 5)), dash_capstyle='roun
 plt.legend()
 plt.show()
 
-
-
-# plot for experiment 3
-
-plt.plot(x, exp4_means, label="Exp 1: Average score", linewidth=3, color = 'red')
-plt.plot(x, exp4_min, label="Exp 1: Lowest score", color = 'blue')
-plt.plot(x, exp4_max, label="Exp 1: Highest score", color = 'green')
+plt.plot(x, exp1_means, label="Exp 1: Average score", linewidth=3, color = 'red')
+plt.plot(x, exp1_min, label="Exp 1: Lowest score", color = 'blue')
+plt.plot(x, exp1_max, label="Exp 1: Highest score", color = 'green')
 
 plt.xlabel("Number of colors k")
 plt.ylabel("Alice's score")
 plt.xticks(range(1, 16))
+#plt.axvline(x=4.5, ymin=0, ymax=200 , linestyle=(0, (1, 5)), dash_capstyle='round', dash_joinstyle='round', color='#808080')
+#plt.axvline(x=7.5, ymin=0, ymax=200 , linestyle=(0, (1, 5)), dash_capstyle='round', dash_joinstyle='round', color='#808080')
+
+plt.legend()
+plt.show()
+"""
+
+"""
+# plot for experiment 3
+
+plt.plot(x, exp3_means, label="Exp 3: Average score", linewidth=3, color = 'red')
+plt.plot(x, exp3_min, label="Exp 3: Lowest score", color = 'blue')
+plt.plot(x, exp3_max, label="Exp 3: Highest score", color = 'green')
+
+plt.xlabel("Number of colors k")
+plt.ylabel("Alice's score")
+plt.xticks(range(1, 16))
+plt.yticks(range(0,225,25))
 
 plt.legend()
 plt.show()
@@ -165,24 +176,57 @@ plt.plot(x, exp4_max, label="Exp 4: Highest score", color = 'green')
 plt.xlabel("Number of colors k")
 plt.ylabel("Alice's score")
 plt.xticks(range(1, 16))
+plt.yticks(range(0,225,25))
+
 
 plt.legend()
 plt.show()
 
-
-# plot comparing average scores of all 4 experiments
+# plot comparing average scores of all experiments feat. Bob
 
 colors = list(range(1, 16))
-plt.plot(colors, exp1_means, label="Exp 1", linewidth=2, color='red')
-plt.plot(colors, exp3_means, label="Exp 3", linewidth=2, color='blue')
-plt.plot(colors, exp4_means, label="Exp 4", linewidth=2, color='green')
+plt.plot(colors, exp3_means, label="Exp 3", linewidth=2, color='purple')
+plt.plot(colors, exp4_means, label="Exp 4", linewidth=2, color='orange')
 
 plt.xlabel("Number of colors")
 plt.ylabel("Average score")
 plt.xticks(range(1, 16))
-plt.axhline(y=200, linestyle='dotted', color='black', label="Exp 2") #exp 2, because all results were with score=200
+plt.yticks(range(0,225,25))
+#plt.axhline(y=exp2_mean, linestyle='dotted', color='black', label="Exp 2")
 
 plt.legend()
 plt.show()
 
+colors = list(range(1, 16))
+plt.plot(colors, exp3_means, label="Exp 3", linewidth=2, color='purple')
+plt.plot(colors, exp4_means, label="Exp 4", linewidth=2, color='orange')
+
+plt.xlabel("Number of colors")
+plt.ylabel("Average score")
+plt.xticks(range(1, 16))
+plt.yticks(range(0,225,25))
+plt.axhline(y=exp2_mean, linestyle='dotted', color='black', label="Exp 2")
+
+plt.legend()
+plt.show()
+"""
+
+"""
+# plot comparing average scores of all 4 experiments
+
+colors = list(range(1, 16))
+#plt.plot(colors, exp1_means, label="Exp 1", linewidth=2, color='cyan')
+plt.plot(colors, exp3_means, label="Exp 3", linewidth=2, color='purple')
+plt.plot(colors, exp4_means, label="Exp 4", linewidth=2, color='orange')
+
+plt.xlabel("Number of colors")
+plt.ylabel("Average score")
+plt.xticks(range(1, 16))
+plt.axhline(y=exp2_mean, linestyle='dotted', color='black', label="Exp 2")
+plt.axhline(y=200, linestyle='dotted', color='red', label="standard Tetris")
+
+
+plt.legend()
+plt.show()
+"""
 
